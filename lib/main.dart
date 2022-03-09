@@ -51,24 +51,24 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   bool _showChart = false;
   final List<Transaction> _transactions = [
-    // Transaction(
-    //   id: 't0',
-    //   title: 'Conta Antiga',
-    //   value: 123.98,
-    //   date: DateTime.now().subtract(const Duration(days: 33)),
-    // ),
-    // Transaction(
-    //   id: 't1',
-    //   title: 'Novo tênis de corrida',
-    //   value: 310.76,
-    //   date: DateTime.now().subtract(const Duration(days: 3)),
-    // ),
-    // Transaction(
-    //   id: 't2',
-    //   title: 'Conta de luz',
-    //   value: 211.30,
-    //   date: DateTime.now().subtract(const Duration(days: 4)),
-    // ),
+    Transaction(
+      id: 't0',
+      title: 'Conta Antiga',
+      value: 123.98,
+      date: DateTime.now().subtract(const Duration(days: 33)),
+    ),
+    Transaction(
+      id: 't1',
+      title: 'Novo tênis de corrida',
+      value: 310.76,
+      date: DateTime.now().subtract(const Duration(days: 3)),
+    ),
+    Transaction(
+      id: 't2',
+      title: 'Conta de luz',
+      value: 211.30,
+      date: DateTime.now().subtract(const Duration(days: 4)),
+    ),
     // Transaction(
     //   id: 't3',
     //   title: 'Passagem',
@@ -190,7 +190,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Chart(_recentTransactions)),
             if (!_showChart || !isLandscape)
               SizedBox(
-                  height: availableHeight * 0.75,
+                  height: availableHeight * (isLandscape ? 1 : 0.7),
                   child: TransactionList(_transactions, _removeTransaction)),
           ],
         ),
