@@ -42,62 +42,69 @@ class _TransactionFormState extends State<TransactionForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 2,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              height: 70,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(_selectDate == null
-                        ? 'Nenhuma data selecionada!'
-                        : 'Data: ${DateFormat('dd/MM/y').format(_selectDate!)}'),
-                  ),
-                  TextButton(
-                    child: const Text(
-                      'Selecionar Data',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
+    return SingleChildScrollView(
+      child: Card(
+        elevation: 2,
+        child: Padding(
+          padding: const EdgeInsets.only(
+            top: 10,
+            right: 10,
+            left: 10,
+            bottom: 10,
+          ),
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 70,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(_selectDate == null
+                          ? 'Nenhuma data selecionada!'
+                          : 'Data: ${DateFormat('dd/MM/y').format(_selectDate!)}'),
                     ),
-                    onPressed: _showDatePicker,
-                  ),
-                ],
+                    TextButton(
+                      child: const Text(
+                        'Selecionar Data',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      onPressed: _showDatePicker,
+                    ),
+                  ],
+                ),
               ),
-            ),
-            TextField(
-              decoration: const InputDecoration(labelText: 'Descrição'),
-              controller: _titleController,
-              textInputAction: TextInputAction.next,
-            ),
-            TextField(
-              decoration: const InputDecoration(labelText: 'Valor (R\$)'),
-              controller: _valueController,
-              keyboardType:
-                  const TextInputType.numberWithOptions(decimal: true),
-              textInputAction: TextInputAction.done,
-              onSubmitted: (_) => _submitForm(),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                    child: const Text('Inserir'),
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            Theme.of(context).colorScheme.primary)),
-                    onPressed: _submitForm,
-                  ),
-                )
-              ],
-            )
-          ],
+              TextField(
+                decoration: const InputDecoration(labelText: 'Descrição'),
+                controller: _titleController,
+                textInputAction: TextInputAction.next,
+              ),
+              TextField(
+                decoration: const InputDecoration(labelText: 'Valor (R\$)'),
+                controller: _valueController,
+                keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
+                textInputAction: TextInputAction.done,
+                onSubmitted: (_) => _submitForm(),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      child: const Text('Inserir'),
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Theme.of(context).colorScheme.primary)),
+                      onPressed: _submitForm,
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
