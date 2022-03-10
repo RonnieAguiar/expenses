@@ -1,7 +1,9 @@
+import 'dart:math';
+import 'dart:io';
+
+import 'package:flutter/material.dart';
 import 'package:expenses/components/chart.dart';
 import 'package:expenses/components/transaction_form.dart';
-import 'package:flutter/material.dart';
-import 'dart:math';
 import 'package:expenses/components/transactions_list.dart';
 import 'package:expenses/models/transaction.dart';
 
@@ -131,8 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
-    bool isLandscape =
-        mediaQuery.orientation == Orientation.landscape;
+    bool isLandscape = mediaQuery.orientation == Orientation.landscape;
 
     final myAppBar = AppBar(
       title: const Text(
@@ -174,7 +175,7 @@ class _MyHomePageState extends State<MyHomePage> {
             //     mainAxisAlignment: MainAxisAlignment.center,
             //     children: [
             //       const Text('Exibir Gráfico'),
-            //       Switch(
+            //       Switch.adaptive(
             //         activeColor: Theme.of(context).colorScheme.primary,
             //         value: _showChart,
             //         onChanged: (value) {
@@ -196,10 +197,12 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        onPressed: () => _openTransactionFormModal(context),
-      ),
+      floatingActionButton: Platform.isIOS
+          ? Container()
+          : FloatingActionButton(
+              child: const Icon(Icons.add),
+              onPressed: () => _openTransactionFormModal(context),
+            ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
