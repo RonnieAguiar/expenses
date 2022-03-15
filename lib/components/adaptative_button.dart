@@ -19,15 +19,18 @@ class AdaptativeButton extends StatelessWidget {
         ? CupertinoButton(
             child: Text(label),
             onPressed: onPressed,
+            color: Theme.of(context).primaryColor,
+            padding: const EdgeInsets.symmetric(horizontal: 20),
           )
         : TextButton(
             onPressed: onPressed,
             child: Text(label),
             style: ButtonStyle(
-
               backgroundColor: MaterialStateProperty.all(
                   Theme.of(context).colorScheme.primary),
-              textStyle: MaterialStateProperty.all(const TextStyle(color: Colors.white)),
+              textStyle: MaterialStateProperty.all(
+                const TextStyle(color: Colors.white),
+              ),
             ),
           );
   }
