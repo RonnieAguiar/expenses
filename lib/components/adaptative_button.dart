@@ -22,14 +22,14 @@ class AdaptativeButton extends StatelessWidget {
             color: Theme.of(context).primaryColor,
             padding: const EdgeInsets.symmetric(horizontal: 20),
           )
-        : TextButton(
+        : ElevatedButton(
             onPressed: onPressed,
             child: Text(label),
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(
                   Theme.of(context).colorScheme.primary),
               textStyle: MaterialStateProperty.all(
-                const TextStyle(color: Colors.white),
+                Theme.of(context).textTheme.button
               ),
             ),
           );
