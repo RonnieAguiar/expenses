@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'adaptative_button.dart';
 import 'adaptative_textField.dart';
+import 'adaptative_datePicker.dart';
 
 class TransactionForm extends StatefulWidget {
   final void Function(String, double, DateTime) onSubmit;
@@ -26,22 +26,6 @@ class _TransactionFormState extends State<TransactionForm> {
     widget.onSubmit(title, value, _selectDate!);
   }
 
-  _showDatePicker() {
-    showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2020),
-      lastDate: DateTime.now(),
-    ).then((value) {
-      if (value == null) {
-        return;
-      }
-      setState(() {
-        _selectDate = value;
-      });
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -56,26 +40,13 @@ class _TransactionFormState extends State<TransactionForm> {
           ),
           child: Column(
             children: <Widget>[
-              SizedBox(
-                height: 70,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(_selectDate == null
-                          ? 'Nenhuma data selecionada!'
-                          : 'Data: ${DateFormat('dd/MM/y').format(_selectDate!)}'),
-                    ),
-                    TextButton(
-                      child: const Text(
-                        'Selecionar Data',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      onPressed: _showDatePicker,
-                    ),
-                  ],
-                ),
+              AdaptativeDatePicker(
+                selectedDate: _selectDate,
+                onDateChanged: (newDate) {
+                  setState(() {
+                    _selectDate = newDate;
+                  });
+                },
               ),
               AdaptativeTextField(
                 label: 'Descrição',
